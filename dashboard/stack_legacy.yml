@@ -1,6 +1,6 @@
 provider:
   name: faas
-  gateway: http://127.0.0.1:8080
+  gateway: https://gateway.ivana.smykla.io
 
 # If using of-router then retain the system- prefix, if not using a wildcard-DNS
 # please remove the prefix of `system-`
@@ -17,9 +17,9 @@ functions:
     environment:
       content_type: "text/html"
       combine_output: "false"
-      public_url: "http://127.0.0.1:8080"
+      public_url: "https://gateway.ivana.smykla.io"
  # Comment out if not using public pretty-URL
-      pretty_url: "https://user.o6s.io/function"
+      pretty_url: "https://user.ivana.smykla.io/function"
       query_pretty_url: "true"
 
   system-pipeline:
@@ -32,7 +32,7 @@ functions:
     environment:
       content_type: "text/html"
       combine_output: "false"
-      gateway_url: http://gateway.openfaas:8080/
+      gateway_url: http://gateway.ivana-openfaas:8080/
 
 # For Swarm use URL below which does not include .openfaas suffix:
 #    gateway_url: http://gateway:8080/

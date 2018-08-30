@@ -2,7 +2,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: of-builder
-  namespace: openfaas
+  namespace: ivana-openfaas
 spec:
   replicas: 1
   template:

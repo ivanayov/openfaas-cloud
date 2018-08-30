@@ -1,30 +1,23 @@
 provider:
   name: faas
-  gateway: http://127.0.0.1:8080
+  gateway: https://gateway.ivana.smykla.io
 
 # If using of-router then retain the system- prefix, if not using a wildcard-DNS
 # please remove the prefix of `system-`
 
 functions:
-  system-dashboard:
-    lang: node8-express
-    handler: ./of-cloud-dashboard
-    image: functions/of-cloud-dashboard:0.1.6
-    labels:
-      openfaas-cloud: "1"
-      role: openfaas-system
+  overview:
+    lang: go
+    handler: ./overview
+    image: functions/overview:0.4.4
     environment:
-      write_debug: true
-      # gateway_url: http://gateway:8080/ # when using Swarm
-      gateway_url: http://gateway.openfaas:8080/
-      # base_href: `/function/system-dashboard/` # if not using router
-      base_href: '/dashboard/'
-      # public_url: http://laptop-ip:8080/ # if deploying locally
-      public_url: https://system.o6s.io
-      # Comment out if not using public pretty-URL
-      pretty_url: https://user.o6s.io/function
-      query_pretty_url: 'true'
-  system-list-functions:
+      content_type: "text/html"
+      combine_output: "false"
+      public_url: "https://gateway.ivana.smykla.io/"
+ # Comment out if not using public pretty-URL
+      query_pretty_url: "true"
+
+  list-functions:
     skip_build: true
     image: functions/list-functions:0.4.6
     fprocess: ./handler
@@ -32,10 +25,22 @@ functions:
       openfaas-cloud: "1"
       role: openfaas-system
     environment:
-      gateway_url: http://gateway.openfaas:8080/
+      gateway_url: http://gateway.ivana-openfaas:8080/
       secret_mount_path: /var/openfaas/secrets
       basic_auth: true
       write_debug: true
     secrets:
       - basic-auth-user
       - basic-auth-password
+
+  pipeline:
+    lang: go
+    handler: ./pipeline
+    image: functions/pipeline:0.1.0
+    environment:
+      content_type: "text/html"
+      combine_output: "false"
+      gateway_url: http://gateway.ivana-openfaas:8080/
+
+# For Swarm use URL below which does not include .openfaas suffix:
+#    gateway_url: http://gateway:8080/

@@ -1,6 +1,6 @@
 provider:
   name: faas
-  gateway: http://127.0.0.1:8080
+  gateway: https://gateway.ivana.smykla.io
 
 functions:
   system-github-event:
@@ -45,7 +45,7 @@ functions:
   git-tar:
     lang: dockerfile
     handler: ./git-tar
-    image: functions/of-git-tar:0.8.12
+    image: docwareiy/of-git-tar:depl_parallel
     labels:
       openfaas-cloud: "1"
       role: openfaas-system
@@ -81,7 +81,7 @@ functions:
       - basic-auth-user
       - basic-auth-password
       - payload-secret
-#      - swarm-pull-secret
+      #- swarm-pull-secret
 
   garbage-collect:
     lang: go

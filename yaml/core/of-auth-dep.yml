@@ -2,7 +2,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: of-auth
-  namespace: openfaas
+  namespace: ivana-openfaas
 spec:
   replicas: 1
   template:
@@ -42,9 +42,9 @@ spec:
 
 # Community cluster config:
           - name: external_redirect_domain
-            value: "https://auth.system.o6s.io"
+            value: "https://auth.system.ivana.smykla.io"
           - name: cookie_root_domain
-            value: ".system.o6s.io"
+            value: ".system.ivana.smykla.io"
 
           - name: public_key_path
             value: "/var/secrets/public/key.pub"
