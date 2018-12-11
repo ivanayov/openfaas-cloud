@@ -17,6 +17,10 @@ const genRepoUrl = ({ gitOwner, gitRepoURL }) => (
   `${gitRepoURL}/commits/master`
 );
 
+const genOwner = ({ gitOwner }) => (
+  `${gitOwner.substring(0, 2)}`
+);
+
 const FunctionTableItem = ({ onClick, fn, user }) => {
   const {
     shortName,
@@ -31,12 +35,16 @@ const FunctionTableItem = ({ onClick, fn, user }) => {
   const repoUrl = genRepoUrl(fn);
   const logPath = genLogPath(fn, user);
   const fnDetailPath = genFnDetailPath(fn, user);
+  const owner = genOwner(fn);
 
   const handleClick = () => onClick(fnDetailPath);
 
   return (
     <tr onClick={handleClick} className="cursor-pointer">
       <td>{shortName}</td>
+      <td>
+        { owner }
+      </td>
       <td>
         <Button
           outline

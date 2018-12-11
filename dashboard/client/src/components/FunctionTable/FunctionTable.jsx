@@ -51,6 +51,7 @@ const FunctionTable = withRouter(({ isLoading, fns, user, history }) => {
       <thead>
       <tr>
         <th>Name</th>
+        <th>Owner</th>
         <th style={{ width: '42px' }} />
         <th>Repository</th>
         <th>SHA</th>
