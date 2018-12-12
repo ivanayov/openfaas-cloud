@@ -18,7 +18,10 @@ const genRepoUrl = ({ gitOwner, gitRepoURL }) => (
 );
 
 const genOwner = ({ gitOwner }) => (
-  `${gitOwner.substring(0, 2)}`
+  (gitOwner.split(/[-_]+/).length > 1) ?
+    gitOwner.split(/[-_]+/)[0].substring(0, 1).concat(gitOwner.split(/[-_]+/)[1].substring(0, 1)) :
+      gitOwner.split(/[-_]+/)[0].substring(0, 2)
+
 );
 
 const FunctionTableItem = ({ onClick, fn, user }) => {
@@ -41,10 +44,12 @@ const FunctionTableItem = ({ onClick, fn, user }) => {
 
   return (
     <tr onClick={handleClick} className="cursor-pointer">
-      <td>{shortName}</td>
       <td>
-        { owner }
+        <div class="rounded border border-secondary w-50 text-center">
+          { owner }
+        </div>
       </td>
+      <td>{shortName}</td>
       <td>
         <Button
           outline
